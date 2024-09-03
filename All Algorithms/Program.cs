@@ -32,6 +32,7 @@ namespace All_Algorithms
 				Console.WriteLine("Element is not present in array");
 			else
 				Console.WriteLine("Element is present at index - " + result);
+
 			Console.ReadLine();	
 		}
 	}
