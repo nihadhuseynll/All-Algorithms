@@ -217,41 +217,88 @@ namespace All_Algorithms
 		//5.Insertion Sort Algorithm
 
 		/* Function to sort array using insertion sort */
+		//static void Sort(int[] arr)
+		//{
+		//	int n = arr.Length;
+		//	for(int i= 1;i<n; i++)
+		//	{
+		//		int key = arr[i];
+		//		int j = i - 1;
+
+		//		/* Move elements of arr[0..i-1], that are
+		//	  greater than key, to one position ahead
+		//	  of their current position */
+		//		while (j >= 0 && arr[j] > key)
+		//		{
+		//			arr[j+1]= arr[j];
+		//			j = j - 1;
+		//		}
+		//		arr[j +1 ] = key;
+		//	}
+		//}
+		///* A utility function to print array of size n */
+		//static void Print(int[] arr)
+		//{
+		//	int n = arr.Length;
+		//	for(int i = 0; i < n; i++)
+		//	{
+		//		Console.Write(arr[i] + " ");
+		//	}
+		//	Console.WriteLine();
+		//}
+		//static void Main(string[] args)
+		//{
+		//	int[] arr = { 12, 11, 13, 5, 6 };
+		//	Sort(arr);
+		//	Print(arr);
+		//	Console.ReadLine();	
+		//}
+
+		//6.Selection Sort Algorithm
+
 		static void Sort(int[] arr)
 		{
 			int n = arr.Length;
-			for(int i= 1;i<n; i++)
-			{
-				int key = arr[i];
-				int j = i - 1;
 
-				/* Move elements of arr[0..i-1], that are
-			  greater than key, to one position ahead
-			  of their current position */
-				while (j >= 0 && arr[j] > key)
+			// One by one move boundary of unsorted subarray
+			for (int i=0; i < n-1; i++)
+			{
+
+				// Find the minimum element in unsorted array
+				int min_index = i;
+
+				for(int j = i + 1; j<n; j++)
 				{
-					arr[j+1]= arr[j];
-					j = j - 1;
+					if (arr[j]  < arr[min_index])
+					{
+						min_index = j;	
+					}
 				}
-				arr[j +1 ] = key;
+
+				// Swap the found minimum element with the first element
+				int temp = arr[min_index];
+				arr[min_index] = arr[i];
+				arr[i] = temp;
 			}
 		}
-		/* A utility function to print array of size n */
+
+		// Prints the array
 		static void Print(int[] arr)
 		{
 			int n = arr.Length;
-			for(int i = 0; i < n; i++)
+			for(int i=0; i < n; i++)
 			{
 				Console.Write(arr[i] + " ");
 			}
-			Console.WriteLine();
+			Console.WriteLine();	
 		}
+
 		static void Main(string[] args)
 		{
-			int[] arr = { 12, 11, 13, 5, 6 };
+			int[] arr = { 64, 25, 12, 22, 11 };
 			Sort(arr);
 			Print(arr);
-			Console.ReadLine();	
+			Console.ReadLine();
 		}
 	}
 }
