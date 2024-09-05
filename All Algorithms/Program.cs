@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -256,49 +257,119 @@ namespace All_Algorithms
 
 		//6.Selection Sort Algorithm
 
+		//static void Sort(int[] arr)
+		//{
+		//	int n = arr.Length;
+
+		//	// One by one move boundary of unsorted subarray
+		//	for (int i=0; i < n-1; i++)
+		//	{
+
+		//		// Find the minimum element in unsorted array
+		//		int min_index = i;
+
+		//		for(int j = i + 1; j<n; j++)
+		//		{
+		//			if (arr[j]  < arr[min_index])
+		//			{
+		//				min_index = j;	
+		//			}
+		//		}
+
+		//		// Swap the found minimum element with the first element
+		//		int temp = arr[min_index];
+		//		arr[min_index] = arr[i];
+		//		arr[i] = temp;
+		//	}
+		//}
+
+		//// Prints the array
+		//static void Print(int[] arr)
+		//{
+		//	int n = arr.Length;
+		//	for(int i=0; i < n; i++)
+		//	{
+		//		Console.Write(arr[i] + " ");
+		//	}
+		//	Console.WriteLine();	
+		//}
+
+		//static void Main(string[] args)
+		//{
+		//	int[] arr = { 64, 25, 12, 22, 11 };
+		//	Sort(arr);
+		//	Print(arr);
+		//	Console.ReadLine();
+		//}
+
+		//6.Heap Sort Algorithm
+
 		static void Sort(int[] arr)
 		{
 			int n = arr.Length;
 
-			// One by one move boundary of unsorted subarray
-			for (int i=0; i < n-1; i++)
+			for(int i = n/2 - 1; i >= 0; i--)
 			{
-
-				// Find the minimum element in unsorted array
-				int min_index = i;
-
-				for(int j = i + 1; j<n; j++)
-				{
-					if (arr[j]  < arr[min_index])
-					{
-						min_index = j;	
-					}
-				}
-
-				// Swap the found minimum element with the first element
-				int temp = arr[min_index];
-				arr[min_index] = arr[i];
+				Heapify(arr, n, i);
+			}
+			for (int i = n - 1; i > 0; i--)
+			{
+				// Move current root to end
+				int temp = arr[0];
+				arr[0] = arr[i];
 				arr[i] = temp;
+
+				// call max heapify on the reduced heap
+				Heapify(arr, i, 0);
 			}
 		}
 
-		// Prints the array
-		static void Print(int[] arr)
+		static void Heapify(int[] arr, int n, int i)
 		{
-			int n = arr.Length;
-			for(int i=0; i < n; i++)
+			int largest = i;
+			int l = 2 * i + 1;
+			int r = 2 * i + 2;
+
+			if (l < n && arr[l] > arr[largest])
 			{
-				Console.Write(arr[i] + " ");
+				largest = l;
 			}
-			Console.WriteLine();	
+			if(r<n && arr[r] > arr[largest])
+			{
+				largest = r;
+			}
+			if(largest != i)
+			{
+				int swap = arr[i];
+				arr[i] = arr[largest];
+				arr[largest] = swap;
+
+				Heapify(arr, n, largest);
+			}
 		}
 
-		static void Main(string[] args)
+		/* A utility function to print array of size n */
+		static void printArray(int[] arr)
 		{
-			int[] arr = { 64, 25, 12, 22, 11 };
+			int N = arr.Length;
+			for (int i = 0; i < N; ++i)
+				Console.Write(arr[i] + " ");
+			Console.Read();
+		}
+
+		// Driver's code
+		public static void Main()
+		{
+			int[] arr = { 12, 11, 13, 5, 6, 7 };
+			int N = arr.Length;
+
+			// Function call
 			Sort(arr);
-			Print(arr);
-			Console.ReadLine();
+
+			Console.WriteLine("Sorted array is");
+			printArray(arr);
+
+			Console.ReadLine();	
 		}
 	}
 }
