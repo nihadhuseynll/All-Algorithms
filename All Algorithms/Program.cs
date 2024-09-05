@@ -147,71 +147,111 @@ namespace All_Algorithms
 
 		//4.Breadth First Search Algorithm
 
-		static void BFS(List<List<int>> adj, int s, bool[] visited)
+		//static void BFS(List<List<int>> adj, int s, bool[] visited)
+		//{
+		//	// Create a queue for BFS
+		//	Queue<int> q = new Queue<int>();
+
+		//	// Mark the source node as visited and enqueue it
+		//	visited[s] = true;
+		//	q.Enqueue(s);
+
+		//	// Iterate over the queue
+		//	while (q.Count > 0)
+		//	{
+		//		// Dequeue a vertex from queue and print it
+		//		int curr = q.Dequeue();
+		//		Console.Write(curr + " ");
+
+		//		// Get all adjacent vertices of the dequeued vertex
+		//		// If an adjacent has not been visited, 
+		//		// mark it visited and enqueue it
+		//		foreach (int i in adj[curr])
+		//		{
+		//			if (!visited[i])
+		//			{
+		//				visited[i] = true;
+		//				q.Enqueue(i);
+		//			}
+		//		}
+		//	}
+		//}
+
+		//// Function to add an edge to the graph
+		//static void AddEdge(List<List<int>> adj, int u, int v)
+		//{
+		//	adj[u].Add(v);
+		//	adj[v].Add(u);
+		//}
+
+		//static void Main(string[] args)
+		//{
+		//	// Number of vertices in the graph
+		//	int V = 5;
+
+		//	// Adjacency list representation of the graph
+		//	List<List<int>> adj = new List<List<int>>(V);
+		//	for (int i = 0; i < V; i++)
+		//	{
+		//		adj.Add(new List<int>());
+		//	}
+
+		//	// Add edges to the graph
+		//	int[,] edges = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 } };
+
+		//	for (int i = 0; i < edges.GetLength(0); i++)
+		//	{
+		//		AddEdge(adj, edges[i, 0], edges[i, 1]);
+		//	}
+
+		//	// Mark all the vertices as not visited
+		//	bool[] visited = new bool[V];
+
+		//	// Perform BFS traversal starting from vertex 0
+		//	Console.WriteLine("BFS starting from 0 : ");
+		//	BFS(adj, 0, visited);
+
+		//	Console.ReadLine();
+		//}
+
+		//5.Insertion Sort Algorithm
+
+		/* Function to sort array using insertion sort */
+		static void Sort(int[] arr)
 		{
-			// Create a queue for BFS
-			Queue<int> q = new Queue<int>();
-
-			// Mark the source node as visited and enqueue it
-			visited[s] = true;
-			q.Enqueue(s);
-
-			// Iterate over the queue
-			while (q.Count > 0)
+			int n = arr.Length;
+			for(int i= 1;i<n; i++)
 			{
-				// Dequeue a vertex from queue and print it
-				int curr = q.Dequeue();
-				Console.Write(curr + " ");
+				int key = arr[i];
+				int j = i - 1;
 
-				// Get all adjacent vertices of the dequeued vertex
-				// If an adjacent has not been visited, 
-				// mark it visited and enqueue it
-				foreach (int i in adj[curr])
+				/* Move elements of arr[0..i-1], that are
+			  greater than key, to one position ahead
+			  of their current position */
+				while (j >= 0 && arr[j] > key)
 				{
-					if (!visited[i])
-					{
-						visited[i] = true;
-						q.Enqueue(i);
-					}
+					arr[j+1]= arr[j];
+					j = j - 1;
 				}
+				arr[j +1 ] = key;
 			}
 		}
-
-		// Function to add an edge to the graph
-		static void AddEdge(List<List<int>> adj, int u, int v)
+		/* A utility function to print array of size n */
+		static void Print(int[] arr)
 		{
-			adj[u].Add(v);
-			adj[v].Add(u);
+			int n = arr.Length;
+			for(int i = 0; i < n; i++)
+			{
+				Console.Write(arr[i] + " ");
+			}
+			Console.WriteLine();
 		}
-
 		static void Main(string[] args)
 		{
-			// Number of vertices in the graph
-			int V = 5;
-
-			// Adjacency list representation of the graph
-			List<List<int>> adj = new List<List<int>>(V);
-			for (int i = 0; i < V; i++)
-			{
-				adj.Add(new List<int>());
-			}
-
-			// Add edges to the graph
-			int[,] edges = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 1, 4 }, { 2, 4 } };
-
-			for (int i = 0; i < edges.GetLength(0); i++)
-			{
-				AddEdge(adj, edges[i, 0], edges[i, 1]);
-			}
-
-			// Mark all the vertices as not visited
-			bool[] visited = new bool[V];
-
-			// Perform BFS traversal starting from vertex 0
-			Console.WriteLine("BFS starting from 0 : ");
-			BFS(adj, 0, visited);
-
-			Console.ReadLine();
+			int[] arr = { 12, 11, 13, 5, 6 };
+			Sort(arr);
+			Print(arr);
+			Console.ReadLine();	
 		}
 	}
 }
